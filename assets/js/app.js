@@ -143,17 +143,17 @@ d3.csv("assets/data/data.csv").then(function(data) {
       .attr("opacity", ".5");
 
   // Create group for  2 x- axis labels
-  var lables = svg_group.append("g")
+  var labels = svg_group.append("g")
       .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
-  var income_label = lables.append("text")
+  var income_label = labels.append("text")
       .attr("x", 0)
       .attr("y", 20)
       .attr("value", "income") // value to grab for event listener
       .classed("active", true)
       .text("Average Income Per State");
 
-  var age_label = lables.append("text")
+  var age_label = labels.append("text")
       .attr("x", 0)
       .attr("y", 40)
       .attr("value", "age") // value to grab for event listener
@@ -174,7 +174,7 @@ d3.csv("assets/data/data.csv").then(function(data) {
   var circles = updateToolTip(current_x, circles);
 
   // x axis labels event listener
-  lables.selectAll("text")
+  labels.selectAll("text")
       .on("click", function() {
       // get value of selection
       var value = d3.select(this).attr("value");
