@@ -100,10 +100,10 @@ d3.csv("assets/data/data.csv").then(function(data) {
   //Test data connection
   console.log(data[1]);
   // parse data
-  data.forEach(function(incomeData) {
-      incomeData.income = +incomeData.income;
-      incomeData.healthcare = +incomeData.healthcare/100;
-      incomeData.age = +incomeData.age;
+  data.forEach(function(test_data) {
+      test_data.income = +test_data.income;
+      test_data.healthcare = +test_data.healthcare/100;
+      test_data.age = +test_data.age;
   });
 
   // lin_xscale function above csv import
@@ -138,7 +138,6 @@ d3.csv("assets/data/data.csv").then(function(data) {
       .attr("cx", d => lin_xscale(d[current_x]))
       .attr("cy", d => lin_yscale(d.healthcare))
       .attr("r", 10)
-      .attr("class", d => d.abbr)
       .attr("fill", "blue")
       .attr("opacity", ".5");
 
