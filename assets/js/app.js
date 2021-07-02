@@ -57,7 +57,8 @@ function renderCircles(circles, transition_xscale, current_x) {
 
   circles.transition()
     .duration(1000)
-    .attr("cx", d => transition_xscale(d[current_x]));
+    .attr("cx", d => transition_xscale(d[current_x]))
+    ;
 
   return circles;
 }
@@ -137,6 +138,7 @@ d3.csv("assets/data/data.csv").then(function(data) {
       .attr("cx", d => lin_xscale(d[current_x]))
       .attr("cy", d => lin_yscale(d.healthcare))
       .attr("r", 10)
+      .attr("class", d => d.abbr)
       .attr("fill", "blue")
       .attr("opacity", ".5");
 
@@ -144,19 +146,19 @@ d3.csv("assets/data/data.csv").then(function(data) {
   var lables = svg_group.append("g")
       .attr("transform", `translate(${width / 2}, ${height + 20})`);
 
-  var income_lable = lables.append("text")
+  var income_label = lables.append("text")
       .attr("x", 0)
       .attr("y", 20)
       .attr("value", "income") // value to grab for event listener
       .classed("active", true)
-      .text("Average Income Per US State");
+      .text("Average Income Per State");
 
-  var age_lable = lables.append("text")
+  var age_label = lables.append("text")
       .attr("x", 0)
       .attr("y", 40)
       .attr("value", "age") // value to grab for event listener
       .classed("inactive", true)
-      .text("Average Age Per US State");
+      .text("Average Age Per State");
 
   // append y axis
   svg_group.append("text")
@@ -166,7 +168,7 @@ d3.csv("assets/data/data.csv").then(function(data) {
       .attr("dy", "1em")
       .classed("active", true)
       .classed("axis-text", true)
-      .text("Health Insurance Coverage (percent)");
+      .text("Health Insurance Coverage (%)");
 
   // updateToolTip function above csv import
   var circles = updateToolTip(current_x, circles);
@@ -195,18 +197,18 @@ d3.csv("assets/data/data.csv").then(function(data) {
 
           // changes classes to change bold text
           if (current_x === "age") {
-          age_lable
+          age_label
               .classed("active", true)
               .classed("inactive", false);
-          income_lable
+          income_label
               .classed("active", false)
               .classed("inactive", true);
           }
           else {
-          age_lable
+          age_label
               .classed("active", false)
               .classed("inactive", true);
-          income_lable
+          income_label
               .classed("active", true)
               .classed("inactive", false);
           }
